@@ -15,6 +15,11 @@ class BaseCharacter {
     character.getHurt(damage);
   }
 
+  heal() {
+    this.hp += 30;
+    if (this.hp>this.maxHp){this.hp=this.maxHp}
+  }
+
   getHurt(damage) { 
     this.hp -= damage;
     if (this.hp <= 0) { 
@@ -67,6 +72,11 @@ class Hero extends BaseCharacter {
     this.hpElement.textContent = this.hp;
     this.maxHpElement.textContent = this.maxHp;
   }
+  heal() {
+    super.heal();
+    this.updateHtml(this.hpElement, this.hurtElement);
+    console.log(this.name+"英雄 補血30");
+  }
 
   attack(character) {
     var damage = Math.random() * (this.ap / 2) + (this.ap / 2);
@@ -116,6 +126,12 @@ function addSkillEvent() {
 }
 addSkillEvent();
 
+var healling = document.getElementById("heal");
+healling.onclick = function() { 
+    heroHeal(); 
+  }
+
+
 //回合設定
 var rounds = 10;
 function endTurn() {
@@ -137,6 +153,37 @@ function heroAttack() {
     }, 500);
   }, 100);
 
+  setTimeout(function() {
+    if (monster.alive) {
+      monster.element.classList.add("attacking");
+      setTimeout(function() {
+        monster.attack(hero);
+        monster.element.classList.remove("attacking");
+        endTurn();
+        if (hero.alive == false) {
+          finish();
+        } else {
+          document.getElementsByClassName("skill-block")[0].style.display = "block";
+        }
+      }, 500);
+    } else {
+      finish();
+    }
+  }, 1100);
+}
+
+function heroHeal() {
+  document.getElementsByClassName("skill-block")[0].style.display = "none";
+  hero.heal();
+  /*
+  setTimeout(function() {
+    hero.element.classList.add("attacking");
+    setTimeout(function() {
+      hero.attack(monster);
+      hero.element.classList.remove("attacking");
+    }, 500);
+  }, 100);
+  */
   setTimeout(function() {
     if (monster.alive) {
       monster.element.classList.add("attacking");
