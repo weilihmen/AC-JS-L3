@@ -20,6 +20,28 @@ class BaseCharacter {
     if (this.hp <= 0) { 
       this.die();
     }
+
+    //以下是放動畫的設定
+    var _this = this;
+    var i = 1;
+    _this.id = setInterval(function() {
+      //i==1 代表圖片第一次撥放
+      if (i == 1) {
+          _this.element.getElementsByClassName("effect-image")[0].style.display = "block";
+          _this.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+          _this.element.getElementsByClassName("hurt-text")[0].textContent = damage;
+        }
+        
+        _this.element.getElementsByClassName("effect-image")[0].src = 'images/effect/blade/'+ i +'.png';
+        i++;
+      //i>8 代表圖片撥放完畢
+      if (i > 8) {
+            _this.element.getElementsByClassName("effect-image")[0].style.display = "none";
+            _this.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
+            _this.element.getElementsByClassName("hurt-text")[0].textContent = "";
+            clearInterval(_this.id);
+          }
+    }, 50);
   }
 
   die() {
@@ -133,3 +155,4 @@ function heroAttack() {
     }
   }, 1100);
 }
+
