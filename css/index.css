@@ -186,3 +186,13 @@
 #dialog.lose .lose-dialog {
   display: block;
 }
+
+#hero-image-block, #monster-image-block {
+  position: relative;
+  transition: left 500ms, right 500ms;
+  display: inline-block;
+  width: 49%;
+}
+#hero-image-block.attacking {
+  left: 200px;
+}
