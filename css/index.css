@@ -127,6 +127,12 @@
   bottom: 0px;
 }
 
+#hero-image-block    .character-block .heal-effect-image{
+  position: absolute;
+  left: 60px;
+  bottom: -40px;
+}
+
 /* 設定transition class */
 /* 給 .hurt-text.attacked 使用*/
 #hero-image-block    .character-block .hurt-text,
