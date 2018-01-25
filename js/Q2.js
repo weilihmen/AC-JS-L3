@@ -56,7 +56,7 @@ class BaseCharacter {
             _this.element.getElementsByClassName("hurt-text")[0].textContent = "";
             clearInterval(_this.id);
           }
-    }, 50);
+    }, 90);
   }
 
   die() {
@@ -173,13 +173,13 @@ function heroAttack() {
         if (hero.alive == false) {
           finish();
         } else {
-          document.getElementsByClassName("skill-block")[0].style.display = "block";
+          setTimeout(function(){document.getElementsByClassName("skill-block")[0].style.display = "block";},750);
         }
       }, 500);
     } else {
       finish();
     }
-  }, 1100);
+  }, 1320);
 }
 
 function heroHeal() {
@@ -204,13 +204,13 @@ function heroHeal() {
         if (hero.alive == false) {
           finish();
         } else {
-          document.getElementsByClassName("skill-block")[0].style.display = "block";
+          setTimeout(function(){document.getElementsByClassName("skill-block")[0].style.display = "block";},750);
         }
       }, 500);
     } else {
       finish();
     }
-  }, 1100);
+  }, 900);
 }
 
 function finish() {
